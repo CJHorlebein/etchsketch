@@ -1,0 +1,74 @@
+<DOCTYPE! html>
+
+<head>
+	<title></title>
+	<style>
+		body{
+			background-color: beige;
+			font-family: arial, serif;
+			font-size: 1.5em;
+
+		}
+		#etchCore{
+			background-color: white;
+			position: relative;
+			margin: auto;
+			top: 150px;
+			width: 640px;
+			height: 640px;
+			display: grid;
+		}
+		.gridStyle{
+
+			border: solid 1px #CCD1D1;
+		}
+
+		.mOver {
+			background-color: black;
+		}
+	</style>
+</head>
+<body> 
+	<div id="etchCore">
+	</div>
+
+
+
+
+
+	<script>
+	const etchCore = document.querySelector("#etchCore");
+	const etchStyle = document.querySelector("#etchCore").style;
+
+	let input = 16;
+	let gSize = 960/input;
+	inputs = input*input;
+
+
+	etchStyle.gridTemplateColumns = 'repeat(' + input + ', auto)';
+
+
+
+	for(i =0; i< inputs ; i++){
+		let div = document.createElement("div");
+		div.classList.add("gridStyle");
+		div.textContent = "";
+		etchCore.appendChild(div);
+	}
+
+
+	</script>
+ 
+	<script>
+	document.getElementsByClassName("gridStyle").onmouseover = function() {mouseOver()};
+
+function mouseOver() {
+    document.getElementsByClassName("gridStyle").classList.add("mOver");
+    cosole.log("fuck");
+}
+
+
+
+	</script>
+
+</body>
