@@ -9,6 +9,14 @@
 			font-size: 1.5em;
 
 		}
+
+		#btnReset{
+			position: relative;
+			margin: 20px 45%;
+			top: 150px;
+			width: 10%;
+		}
+
 		#etchCore{
 			background-color: white;
 			position: relative;
@@ -23,13 +31,13 @@
 			border: solid 1px #CCD1D1;
 		}
 
-		.mOver {
-			background-color: black;
-		}
+
+
 	</style>
 </head>
 <body> 
-	<div id="etchCore">
+	<button id = "btnReset">Restart</button>
+	<div id = "etchCore">
 	</div>
 
 
@@ -41,14 +49,13 @@
 	const etchStyle = document.querySelector("#etchCore").style;
 
 	let input = 16;
+
+	document.getElementById("btnReset").addEventListener("click", gridReset);
+
 	let gSize = 960/input;
 	inputs = input*input;
 
-
 	etchStyle.gridTemplateColumns = 'repeat(' + input + ', auto)';
-
-
-
 	for(i =0; i< inputs ; i++){
 		let div = document.createElement("div");
 		div.classList.add("gridStyle");
@@ -56,16 +63,28 @@
 		etchCore.appendChild(div);
 	}
 
+	const grids = document.querySelectorAll(".gridStyle");
+	for(let i = 0; i<grids.length; i++){
+		grids[i].addEventListener("mouseover", mouseEnter);
+	}
+	
+	function mouseEnter() {
+	    this.style.backgroundColor = "black";
+	}
+
+	document.getElementById("btnReset").addEventListener("click", gridReset);
+
+	function gridReset() {
+		input = prompt("pick a number between 1 and 100");
+		// if (input >= 1 && input <= 100) {input = 100;}
+		for(let i = 0; i<grids.length; i++){
+		grids[i].style.backgroundColor = "white";
+		}
+	}
 
 	</script>
  
 	<script>
-	document.getElementsByClassName("gridStyle").onmouseover = function() {mouseOver()};
-
-function mouseOver() {
-    document.getElementsByClassName("gridStyle").classList.add("mOver");
-    cosole.log("fuck");
-}
 
 
 
