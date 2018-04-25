@@ -40,47 +40,71 @@
 	<div id = "etchCore">
 	</div>
 
-
-
-
-
 	<script>
 	const etchCore = document.querySelector("#etchCore");
 	const etchStyle = document.querySelector("#etchCore").style;
 
-	let input = 16;
+	gridCreate(16);
+	trailEffect();
 
-	document.getElementById("btnReset").addEventListener("click", gridReset);
+	document.getElementById("btnReset").addEventListener("click", gameStart);
 
-	let gSize = 960/input;
-	inputs = input*input;
-
-	etchStyle.gridTemplateColumns = 'repeat(' + input + ', auto)';
-	for(i =0; i< inputs ; i++){
-		let div = document.createElement("div");
-		div.classList.add("gridStyle");
-		div.textContent = "";
-		etchCore.appendChild(div);
+	function gameStart(){
+		gridReset()
+		let input = gridSize();
+		gridCreate(input);
+		trailEffect();
 	}
 
-	const grids = document.querySelectorAll(".gridStyle");
-	for(let i = 0; i<grids.length; i++){
-		grids[i].addEventListener("mouseover", mouseEnter);
-	}
-	
-	function mouseEnter() {
-	    this.style.backgroundColor = "black";
+	// removes all of the previous grid squares
+	function gridReset(){
+		let gridBox = document.getElementById("etchCore")
+		while(gridBox.firstChild){
+			gridBox.removeChild(gridBox.firstChild);
+		}
 	}
 
-	document.getElementById("btnReset").addEventListener("click", gridReset);
+	// funciton to prompt user to pick new grid size
+	function gridSize(){ 
+		let input = prompt("pick a number between 1 and 100");
+		if (!(input >= 1 && input <= 100)) {input = 100;}
+		return input;
+	}
 
-	function gridReset() {
-		input = prompt("pick a number between 1 and 100");
-		// if (input >= 1 && input <= 100) {input = 100;}
+	function gridCreate(input){
+		let gSize = 960/input;
+		let inputs = input*input;
+		
+		etchStyle.gridTemplateColumns = 'repeat(' + input + ', auto)';
+		for(i =0; i< inputs ; i++){
+			let div = document.createElement("div");
+			div.classList.add("gridStyle");
+			div.textContent = "";
+			etchCore.appendChild(div);
+		}
+	}
+
+	// resets grid BG color to white
+	function gridClear() { 
+		let grids = document.querySelectorAll(".gridStyle");
 		for(let i = 0; i<grids.length; i++){
 		grids[i].style.backgroundColor = "white";
 		}
 	}
+
+	// adds mouseover mouse over function to all grids
+	function trailEffect(){
+		let grids = document.querySelectorAll(".gridStyle");
+		for(let i = 0; i<grids.length; i++){
+			grids[i].addEventListener("mouseover", mouseEnter);
+		}
+	}
+
+	// sets BG color when mouse moves across grid
+	function mouseEnter() { 
+	    this.style.backgroundColor = "black";
+	}
+
 
 	</script>
  
