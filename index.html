@@ -30,9 +30,6 @@
 
 			border: solid 1px #CCD1D1;
 		}
-
-
-
 	</style>
 </head>
 <body> 
@@ -100,11 +97,20 @@
 		}
 	}
 
-	// sets BG color when mouse moves across grid
+
+	//Sets trail to random color
+	function mouseEnter(){
+		R = Math.floor(Math.random()*256);
+		G = Math.floor(Math.random()*256);
+		B = Math.floor(Math.random()*256);
+		this.style.backgroundColor = "rgb("+R+","+G+","+B+")";
+	}
+	/*
+	sets BG color when mouse moves across grid
 	function mouseEnter() { 
 	    this.style.backgroundColor = "black";
 	}
-
+	*/
 
 	</script>
  
